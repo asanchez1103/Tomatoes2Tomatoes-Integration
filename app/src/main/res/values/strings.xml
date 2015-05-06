@@ -13,4 +13,22 @@
         <item>@drawable/twoplayer</item>
         <item>@drawable/threeplayer</item>
     </string-array>
+    <string-array name="card_label">
+        <item>@+id/card0label</item>
+        <item>@+id/card1label</item>
+        <item>@+id/card2label</item>
+        <item>@+id/card3label</item>
+        <item>@+id/card4label</item>
+        <item>@+id/card5label</item>
+        <item>@+id/card6label</item>
+    </string-array>
+    <string-array name="card_desc">
+        <item>@+id/card0desc</item>
+        <item>@+id/card1desc</item>
+        <item>@+id/card2desc</item>
+        <item>@+id/card3desc</item>
+        <item>@+id/card4desc</item>
+        <item>@+id/card5desc</item>
+        <item>@+id/card6desc</item>
+    </string-array>
 </resources>

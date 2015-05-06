@@ -2,6 +2,7 @@ package t2t.tomatoes2tomatoes;
 
 import android.app.Activity;
 import android.content.ClipDescription;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Point;
@@ -60,8 +61,199 @@ public class BoardActivity extends Activity implements OnDragListener, OnLongCli
             cardToBeReplaced.setVisibility(View.INVISIBLE);
         }
 
-        // ADDED FROM TRYCARDS - ALEX
+        /*// ADDED FROM TRYCARDS - ALEX
          int numRedCards = 777;
+        int numGreenCards = 249;
+        int cardID = 10; // ID's start at 10 to avoid confusing with holder. Red cards have ID < 1000 Green cards have ID > 1000
+
+        ReadWithScanner redParse = new ReadWithScanner(this, R.raw.redapples,1,"","",0,false);
+        ReadWithScanner greenParse = new ReadWithScanner(this, R.raw.greenappples,1,"","",0,false);
+
+        CardClass redCards[] = new CardClass[numRedCards];
+        CardClass greenCards[] = new CardClass[numGreenCards];
+
+        String nameInfoR[][] = new String[numRedCards][2];
+        String nameInfoG[][] = new String[numGreenCards][2];
+
+
+        try {
+            nameInfoR = redParse.processLineByLine(nameInfoR);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for(int i = 0; i< redCards.length; i++){
+            redCards[i] = new CardClass();
+            redCards[i].setID(cardID);
+            redCards[i].setName(nameInfoR[i][0]);
+            redCards[i].setInfo(nameInfoR[i][1]);
+            redCards[i].setHolder(0);
+            redCards[i].setFlip(false);
+            System.out.print("Red Card #" + Integer.toString(i+1) + ":    ID: " + redCards[i].cardID +  "\nNAME: " + redCards[i].cardName + "\nDESC: " + redCards[i].cardInfo +"\n");
+            cardID++;
+        }
+        try {
+            nameInfoG = greenParse.processLineByLine(nameInfoG);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        cardID = 1000; //green card ID start at 1000
+        for(int j =0; j<greenCards.length; j++){
+            greenCards[j] = new CardClass();
+            greenCards[j].setID(cardID);
+            greenCards[j].setName(nameInfoG[j][0]);
+            greenCards[j].setInfo(nameInfoG[j][1]);
+            greenCards[j].setHolder(0);
+            greenCards[j].setFlip(false);
+            System.out.print("Green Card # " + Integer.toString(j+1) +":    ID: " + greenCards[j].cardID + " \nNAME: " + greenCards[j].cardName + "\nDESC: " + greenCards[j].cardInfo +"\n");
+            cardID++;
+        }
+        System.out.print("Done.");
+        // end parsing*/
+
+        //parent
+        LinearLayout parentLayout=(LinearLayout)findViewById(R.id.playerHand); //activity_main layout
+
+
+        LayoutInflater layoutInflater = getLayoutInflater();
+        View view;
+
+
+        // Register long click listener for all cards
+        findViewById(R.id.card0).setOnLongClickListener(this);
+        findViewById(R.id.card1).setOnLongClickListener(this);
+        findViewById(R.id.card2).setOnLongClickListener(this);
+        findViewById(R.id.card3).setOnLongClickListener(this);
+        findViewById(R.id.card4).setOnLongClickListener(this);
+        findViewById(R.id.card5).setOnLongClickListener(this);
+        findViewById(R.id.card6).setOnLongClickListener(this);
+
+        // Register drag event listeners for target layout containers
+        findViewById(R.id.playerHand).setOnDragListener(this);
+        findViewById(R.id.MiddleRight).setOnDragListener(this);
+
+        // Set up animations for cards
+        animation1 = AnimationUtils.loadAnimation(this, R.anim.to_middle);
+        animation1.setAnimationListener(this);
+        animation2 = AnimationUtils.loadAnimation(this, R.anim.from_middle);
+        animation2.setAnimationListener(this);
+
+        // After 2 seconds, flip cards
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                StartFlip();
+            }
+        }, 2000);
+
+
+    }
+
+
+    public void StartFlip() {
+        //v.setEnabled(false);
+        //FOR TEXT FILLED CARDS THEY ARE RELATIVE LAYOUTS - so far only one is there.
+        ((RelativeLayout)findViewById(R.id.card0)).clearAnimation();
+        ((RelativeLayout)findViewById(R.id.card0)).setAnimation(animation1);
+        ((RelativeLayout)findViewById(R.id.card0)).startAnimation(animation1);
+
+        ((RelativeLayout)findViewById(R.id.card1)).clearAnimation();
+        ((RelativeLayout)findViewById(R.id.card1)).setAnimation(animation1);
+        ((RelativeLayout)findViewById(R.id.card1)).startAnimation(animation1);
+
+        ((RelativeLayout)findViewById(R.id.card2)).clearAnimation();
+        ((RelativeLayout)findViewById(R.id.card2)).setAnimation(animation1);
+        ((RelativeLayout)findViewById(R.id.card2)).startAnimation(animation1);
+
+        ((RelativeLayout)findViewById(R.id.card3)).clearAnimation();
+        ((RelativeLayout)findViewById(R.id.card3)).setAnimation(animation1);
+        ((RelativeLayout)findViewById(R.id.card3)).startAnimation(animation1);
+
+        ((RelativeLayout)findViewById(R.id.card4)).clearAnimation();
+        ((RelativeLayout)findViewById(R.id.card4)).setAnimation(animation1);
+        ((RelativeLayout)findViewById(R.id.card4)).startAnimation(animation1);
+
+        ((RelativeLayout)findViewById(R.id.card5)).clearAnimation();
+        ((RelativeLayout)findViewById(R.id.card5)).setAnimation(animation1);
+        ((RelativeLayout)findViewById(R.id.card5)).startAnimation(animation1);
+
+        ((RelativeLayout)findViewById(R.id.card6)).clearAnimation();
+        ((RelativeLayout)findViewById(R.id.card6)).setAnimation(animation1);
+        ((RelativeLayout)findViewById(R.id.card6)).startAnimation(animation1);
+    }
+
+    @Override
+    public void onAnimationStart(Animation animation) {
+
+    }
+
+    @Override
+    public void onAnimationEnd(Animation animation) {
+        if (animation==animation1) {
+            if (isBackOfCardShowing) {
+                ((ImageView)findViewById(R.id.card0Img)).setImageResource(R.drawable.redcard);
+                ((ImageView)findViewById(R.id.card1Img)).setImageResource(R.drawable.redcard);
+                ((ImageView)findViewById(R.id.card2Img)).setImageResource(R.drawable.redcard);
+                ((ImageView)findViewById(R.id.card3Img)).setImageResource(R.drawable.redcard);
+                ((ImageView)findViewById(R.id.card4Img)).setImageResource(R.drawable.redcard);
+                ((ImageView)findViewById(R.id.card5Img)).setImageResource(R.drawable.redcard);
+                ((ImageView)findViewById(R.id.card6Img)).setImageResource(R.drawable.redcard);
+            } else {
+                ((ImageView)findViewById(R.id.card0Img)).setImageResource(R.drawable.cardback);
+                ((ImageView)findViewById(R.id.card1Img)).setImageResource(R.drawable.cardback);
+                ((ImageView)findViewById(R.id.card2Img)).setImageResource(R.drawable.cardback);
+                ((ImageView)findViewById(R.id.card3Img)).setImageResource(R.drawable.cardback);
+                ((ImageView)findViewById(R.id.card4Img)).setImageResource(R.drawable.cardback);
+                ((ImageView)findViewById(R.id.card5Img)).setImageResource(R.drawable.cardback);
+                ((ImageView)findViewById(R.id.card6Img)).setImageResource(R.drawable.cardback);
+
+            }
+            ((ImageView)findViewById(R.id.card0Img)).clearAnimation();
+            ((ImageView)findViewById(R.id.card0Img)).setAnimation(animation2);
+            ((ImageView)findViewById(R.id.card0Img)).startAnimation(animation2);
+
+            ((ImageView)findViewById(R.id.card1Img)).clearAnimation();
+            ((ImageView)findViewById(R.id.card1Img)).setAnimation(animation2);
+            ((ImageView)findViewById(R.id.card1Img)).startAnimation(animation2);
+
+            ((ImageView)findViewById(R.id.card2Img)).clearAnimation();
+            ((ImageView)findViewById(R.id.card2Img)).setAnimation(animation2);
+            ((ImageView)findViewById(R.id.card2Img)).startAnimation(animation2);
+
+            ((ImageView)findViewById(R.id.card3Img)).clearAnimation();
+            ((ImageView)findViewById(R.id.card3Img)).setAnimation(animation2);
+            ((ImageView)findViewById(R.id.card3Img)).startAnimation(animation2);
+
+            ((ImageView)findViewById(R.id.card4Img)).clearAnimation();
+            ((ImageView)findViewById(R.id.card4Img)).setAnimation(animation2);
+            ((ImageView)findViewById(R.id.card4Img)).startAnimation(animation2);
+
+            ((ImageView)findViewById(R.id.card5Img)).clearAnimation();
+            ((ImageView)findViewById(R.id.card5Img)).setAnimation(animation2);
+            ((ImageView)findViewById(R.id.card5Img)).startAnimation(animation2);
+
+            ((ImageView)findViewById(R.id.card6Img)).clearAnimation();
+            ((ImageView)findViewById(R.id.card6Img)).setAnimation(animation2);
+            ((ImageView)findViewById(R.id.card6Img)).startAnimation(animation2);
+
+        } else {
+            isBackOfCardShowing=!isBackOfCardShowing;
+            findViewById(R.id.card0).setEnabled(true);
+            findViewById(R.id.card1).setEnabled(true);
+            findViewById(R.id.card2).setEnabled(true);
+            findViewById(R.id.card3).setEnabled(true);
+            findViewById(R.id.card4).setEnabled(true);
+            findViewById(R.id.card5).setEnabled(true);
+            findViewById(R.id.card6).setEnabled(true);
+        }
+
+        generateCards();
+    }
+
+    public void generateCards() {
+        // trying to add text AFTER animation
+        // ADDED FROM TRYCARDS - ALEX
+        int numRedCards = 777;
         int numGreenCards = 249;
         int cardID = 10; // ID's start at 10 to avoid confusing with holder. Red cards have ID < 1000 Green cards have ID > 1000
 
@@ -110,164 +302,30 @@ public class BoardActivity extends Activity implements OnDragListener, OnLongCli
         System.out.print("Done.");
         // end parsing
 
-        //parent
-        LinearLayout parentLayout=(LinearLayout)findViewById(R.id.playerHand); //activity_main layout
+        final TypedArray Labels = getResources().obtainTypedArray(R.array.card_label);
+        final TypedArray Desc = getResources().obtainTypedArray(R.array.card_desc);
 
-
-        LayoutInflater layoutInflater = getLayoutInflater();
-        View view;
-
-
-
-
-        for (int i = 0; i < 1; i++){
+        for (int i = 0; i < Desc.length(); i++){
             // add text layout to parent
 
-            view = layoutInflater.inflate(R.layout.single_card_layout, parentLayout, false);
-            RelativeLayout relativeLayout = (RelativeLayout)view.findViewById((R.id.cardtemplate));
+            //view = layoutInflater.inflate(R.layout.single_card_layout, parentLayout, false);
+            // RelativeLayout relativeLayout = (RelativeLayout)view.findViewById((R.id.cardtemplate));
 
-            TextView labelTextView = (TextView) view.findViewById((R.id.card0label));
-             labelTextView.setText(redCards[i+9].cardName);
+            TextView labelTextView = (TextView) findViewById(Labels.getResourceId(i, -1));
+            labelTextView.setText(redCards[i].cardName);
 
 
             //parentLayout.addView(labelTextView);
 
             //view = layoutInflater.inflate(R.layout.card_desc, parentLayout, false);
-            TextView descTextView = (TextView)view.findViewById((R.id.card0desc));
-            descTextView.setText(redCards[i+9].cardInfo);
-           // parentLayout.addView(descTextView);
+            TextView descTextView = (TextView) findViewById(Desc.getResourceId(i, -1));
+            descTextView.setText(redCards[i].cardInfo);
+            // parentLayout.addView(descTextView);
 
-            parentLayout.addView(relativeLayout);
+            //parentLayout.addView(relativeLayout);
         }
 
         // End of TryCards portion
-
-
-        // Register long click listener for all cards
-        findViewById(R.id.card0).setOnLongClickListener(this);
-        findViewById(R.id.card1).setOnLongClickListener(this);
-        findViewById(R.id.card2).setOnLongClickListener(this);
-        findViewById(R.id.card3).setOnLongClickListener(this);
-        findViewById(R.id.card4).setOnLongClickListener(this);
-        findViewById(R.id.card5).setOnLongClickListener(this);
-        findViewById(R.id.card6).setOnLongClickListener(this);
-
-        // Register drag event listeners for target layout containers
-        findViewById(R.id.playerHand).setOnDragListener(this);
-        findViewById(R.id.MiddleRight).setOnDragListener(this);
-
-        // Set up animations for cards
-        animation1 = AnimationUtils.loadAnimation(this, R.anim.to_middle);
-        animation1.setAnimationListener(this);
-        animation2 = AnimationUtils.loadAnimation(this, R.anim.from_middle);
-        animation2.setAnimationListener(this);
-
-        // After 2 seconds, flip cards
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                StartFlip();
-            }
-        }, 2000);
-    }
-
-
-    public void StartFlip() {
-        //v.setEnabled(false);
-        //FOR TEXT FILLED CARDS THEY ARE RELATIVE LAYOUTS - so far only one is there.
-        ((RelativeLayout)findViewById(R.id.card0)).clearAnimation();
-        ((RelativeLayout)findViewById(R.id.card0)).setAnimation(animation1);
-        ((RelativeLayout)findViewById(R.id.card0)).startAnimation(animation1);
-
-        ((ImageView)findViewById(R.id.card1)).clearAnimation();
-        ((ImageView)findViewById(R.id.card1)).setAnimation(animation1);
-        ((ImageView)findViewById(R.id.card1)).startAnimation(animation1);
-
-        ((ImageView)findViewById(R.id.card2)).clearAnimation();
-        ((ImageView)findViewById(R.id.card2)).setAnimation(animation1);
-        ((ImageView)findViewById(R.id.card2)).startAnimation(animation1);
-
-        ((ImageView)findViewById(R.id.card3)).clearAnimation();
-        ((ImageView)findViewById(R.id.card3)).setAnimation(animation1);
-        ((ImageView)findViewById(R.id.card3)).startAnimation(animation1);
-
-        ((ImageView)findViewById(R.id.card4)).clearAnimation();
-        ((ImageView)findViewById(R.id.card4)).setAnimation(animation1);
-        ((ImageView)findViewById(R.id.card4)).startAnimation(animation1);
-
-        ((ImageView)findViewById(R.id.card5)).clearAnimation();
-        ((ImageView)findViewById(R.id.card5)).setAnimation(animation1);
-        ((ImageView)findViewById(R.id.card5)).startAnimation(animation1);
-
-        ((ImageView)findViewById(R.id.card6)).clearAnimation();
-        ((ImageView)findViewById(R.id.card6)).setAnimation(animation1);
-        ((ImageView)findViewById(R.id.card6)).startAnimation(animation1);
-    }
-
-    @Override
-    public void onAnimationStart(Animation animation) {
-
-    }
-
-    @Override
-    public void onAnimationEnd(Animation animation) {
-        if (animation==animation1) {
-            if (isBackOfCardShowing) {
-                ((ImageView)findViewById(R.id.card0)).setImageResource(R.drawable.blankred);
-                ((ImageView)findViewById(R.id.card1)).setImageResource(R.drawable.blankred);
-                ((ImageView)findViewById(R.id.card2)).setImageResource(R.drawable.blankred);
-                ((ImageView)findViewById(R.id.card3)).setImageResource(R.drawable.blankred);
-                ((ImageView)findViewById(R.id.card4)).setImageResource(R.drawable.blankred);
-                ((ImageView)findViewById(R.id.card5)).setImageResource(R.drawable.blankred);
-                ((ImageView)findViewById(R.id.card6)).setImageResource(R.drawable.blankred);
-            } else {
-                ((ImageView)findViewById(R.id.card0)).setImageResource(R.drawable.cardback);
-                ((ImageView)findViewById(R.id.card1)).setImageResource(R.drawable.cardback);
-                ((ImageView)findViewById(R.id.card2)).setImageResource(R.drawable.cardback);
-                ((ImageView)findViewById(R.id.card3)).setImageResource(R.drawable.cardback);
-                ((ImageView)findViewById(R.id.card4)).setImageResource(R.drawable.cardback);
-                ((ImageView)findViewById(R.id.card5)).setImageResource(R.drawable.cardback);
-                ((ImageView)findViewById(R.id.card6)).setImageResource(R.drawable.cardback);
-
-            }
-            ((ImageView)findViewById(R.id.card0)).clearAnimation();
-            ((ImageView)findViewById(R.id.card0)).setAnimation(animation2);
-            ((ImageView)findViewById(R.id.card0)).startAnimation(animation2);
-
-            ((ImageView)findViewById(R.id.card1)).clearAnimation();
-            ((ImageView)findViewById(R.id.card1)).setAnimation(animation2);
-            ((ImageView)findViewById(R.id.card1)).startAnimation(animation2);
-
-            ((ImageView)findViewById(R.id.card2)).clearAnimation();
-            ((ImageView)findViewById(R.id.card2)).setAnimation(animation2);
-            ((ImageView)findViewById(R.id.card2)).startAnimation(animation2);
-
-            ((ImageView)findViewById(R.id.card3)).clearAnimation();
-            ((ImageView)findViewById(R.id.card3)).setAnimation(animation2);
-            ((ImageView)findViewById(R.id.card3)).startAnimation(animation2);
-
-            ((ImageView)findViewById(R.id.card4)).clearAnimation();
-            ((ImageView)findViewById(R.id.card4)).setAnimation(animation2);
-            ((ImageView)findViewById(R.id.card4)).startAnimation(animation2);
-
-            ((ImageView)findViewById(R.id.card5)).clearAnimation();
-            ((ImageView)findViewById(R.id.card5)).setAnimation(animation2);
-            ((ImageView)findViewById(R.id.card5)).startAnimation(animation2);
-
-            ((ImageView)findViewById(R.id.card6)).clearAnimation();
-            ((ImageView)findViewById(R.id.card6)).setAnimation(animation2);
-            ((ImageView)findViewById(R.id.card6)).startAnimation(animation2);
-
-        } else {
-            isBackOfCardShowing=!isBackOfCardShowing;
-            findViewById(R.id.card0).setEnabled(true);
-            findViewById(R.id.card1).setEnabled(true);
-            findViewById(R.id.card2).setEnabled(true);
-            findViewById(R.id.card3).setEnabled(true);
-            findViewById(R.id.card4).setEnabled(true);
-            findViewById(R.id.card5).setEnabled(true);
-            findViewById(R.id.card6).setEnabled(true);
-        }
     }
 
     @Override
@@ -341,10 +399,10 @@ public class BoardActivity extends Activity implements OnDragListener, OnLongCli
 
                         // Replace placeholder image
                         ImageView cardToBeReplaced = (ImageView) findViewById(R.id.placeholder);
-                        cardToBeReplaced.setImageDrawable(getResources().getDrawable(R.drawable.blankred));
+                        cardToBeReplaced.setImageDrawable(getResources().getDrawable(R.drawable.redcard));
 
                         // Delete played card from deck
-                        ImageView deleteCard = (ImageView) findViewById(R.id.card1);
+                        ImageView deleteCard = (ImageView) findViewById(R.id.card1Img);
                         deleteCard.setVisibility(View.GONE);
                         return true;
                     case R.id.card2:
