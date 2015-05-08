@@ -12,8 +12,10 @@ import android.support.v7.app.ActionBarActivity;
 import android.content.ClipData;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.DragEvent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,6 +39,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 
 public class BoardActivity extends Activity implements OnDragListener, OnLongClickListener, Animation.AnimationListener {
@@ -313,6 +317,10 @@ public class BoardActivity extends Activity implements OnDragListener, OnLongCli
 
             TextView labelTextView = (TextView) findViewById(Labels.getResourceId(i, -1));
             labelTextView.setText(redCards[i].cardName);
+            labelTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            labelTextView.setGravity(Gravity.LEFT);
+            labelTextView.setPadding(0,60,0,0);
+
 
 
             //parentLayout.addView(labelTextView);
@@ -320,6 +328,9 @@ public class BoardActivity extends Activity implements OnDragListener, OnLongCli
             //view = layoutInflater.inflate(R.layout.card_desc, parentLayout, false);
             TextView descTextView = (TextView) findViewById(Desc.getResourceId(i, -1));
             descTextView.setText(redCards[i].cardInfo);
+            descTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+            descTextView.setGravity(Gravity.RIGHT);
+            descTextView.setPadding(24,0,10,0);
             // parentLayout.addView(descTextView);
 
             //parentLayout.addView(relativeLayout);
@@ -386,35 +397,35 @@ public class BoardActivity extends Activity implements OnDragListener, OnLongCli
                 // This switch statement determines what happens when a card is dragged to
                 // the placeholder. In the case of card 1, it replaces the placeholder and
                 // disappears afterwards. Copy and paste for all cards.
+                ViewGroup draggedImageViewParentLayout
+                        = (ViewGroup) draggedImageView.getParent();
+                draggedImageViewParentLayout.removeView(draggedImageView);
+                LinearLayout bottomLinearLayout = (LinearLayout) receivingLayoutView;
+                bottomLinearLayout.addView(draggedImageView);
+                draggedImageView.setVisibility(View.VISIBLE);
+
                 switch (draggedImageView.getId()) {
                     case R.id.card0:
-                        return false;
+                        CardEvent(0);
+                        return true;
                     case R.id.card1:
-                        ViewGroup draggedImageViewParentLayout
-                                = (ViewGroup) draggedImageView.getParent();
-                        draggedImageViewParentLayout.removeView(draggedImageView);
-                        LinearLayout bottomLinearLayout = (LinearLayout) receivingLayoutView;
-                        bottomLinearLayout.addView(draggedImageView);
-                        draggedImageView.setVisibility(View.VISIBLE);
-
-                        // Replace placeholder image
-                        ImageView cardToBeReplaced = (ImageView) findViewById(R.id.placeholder);
-                        cardToBeReplaced.setImageDrawable(getResources().getDrawable(R.drawable.redcard));
-
-                        // Delete played card from deck
-                        ImageView deleteCard = (ImageView) findViewById(R.id.card1Img);
-                        deleteCard.setVisibility(View.GONE);
+                        CardEvent(1);
                         return true;
                     case R.id.card2:
-                        return false;
+                        CardEvent(2);
+                        return true;
                     case R.id.card3:
-                        return false;
+                        CardEvent(3);
+                        return true;
                     case R.id.card4:
-                        return false;
+                        CardEvent(4);
+                        return true;
                     case R.id.card5:
-                        return false;
+                        CardEvent(5);
+                        return true;
                     case R.id.card6:
-                        return false;
+                        CardEvent(6);
+                        return true;
                     default:
                         return false;
                 }
@@ -428,5 +439,29 @@ public class BoardActivity extends Activity implements OnDragListener, OnLongCli
                 break;
         }
         return false;
+    }
+
+    public void CardEvent(int id) {
+
+        final TypedArray Labels = getResources().obtainTypedArray(R.array.card_label);
+        final TypedArray Desc = getResources().obtainTypedArray(R.array.card_desc);
+        final TypedArray Img = getResources().obtainTypedArray(R.array.card_img);
+        final TypedArray Layout = getResources().obtainTypedArray(R.array.card_layout);
+
+        // Replace placeholder image
+        ImageView cardToBeReplaced = (ImageView) findViewById(R.id.emptycardImg);
+        cardToBeReplaced.setImageDrawable(getResources().getDrawable(R.drawable.redcard));
+
+        TextView cardLabel = (TextView) findViewById(Labels.getResourceId(id, -1));
+        TextView labelTextView = (TextView) findViewById(R.id.emptycardlabel);
+        labelTextView.setText(cardLabel.getText().toString());
+
+        TextView cardDesc = (TextView) findViewById(Desc.getResourceId(id, -1));
+        TextView descTextView = (TextView) findViewById(R.id.emptycarddesc);
+        descTextView.setText(cardDesc.getText().toString());
+
+        // Delete played card from deck
+        RelativeLayout deleteCard = (RelativeLayout) findViewById(Layout.getResourceId(id, -1));
+        deleteCard.setVisibility(View.GONE);
     }
 }

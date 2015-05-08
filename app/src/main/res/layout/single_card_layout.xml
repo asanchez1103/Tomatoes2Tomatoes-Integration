@@ -18,31 +18,31 @@
             android:adjustViewBounds="true" >
         </ImageView>
         <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="75dp"
+            android:layout_height="@dimen/card_height"
             android:id="@+id/carddesc"
             android:textStyle="bold"
-            android:textSize="9pt"
-            android:layout_marginTop= "20dp"
+            android:layout_marginTop= "10dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="35dp"
+            android:layout_marginLeft="40dp"
             android:layout_marginRight="10dp"
             android:elegantTextHeight="false">
         </TextView>
         <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:id="@+id/cardlabel"
 
             android:layout_alignParentRight="true"
             android:textStyle="bold"
-            android:textSize="5dp"
+            android:textSize="0dp"
             android:layout_alignTop="@+id/redcard"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="0dp"
             android:layout_marginRight="23dp"
             android:rotation="270"
-            >
+            android:layout_marginLeft="10dp"
+            android:textIsSelectable="false">
         </TextView>
     </FrameLayout>
 </RelativeLayout>

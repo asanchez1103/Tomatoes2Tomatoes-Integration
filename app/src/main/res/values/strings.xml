@@ -31,4 +31,22 @@
         <item>@+id/card5desc</item>
         <item>@+id/card6desc</item>
     </string-array>
+    <string-array name="card_img">
+        <item>@+id/card0Img</item>
+        <item>@+id/card1Img</item>
+        <item>@+id/card2Img</item>
+        <item>@+id/card3Img</item>
+        <item>@+id/card4Img</item>
+        <item>@+id/card5Img</item>
+        <item>@+id/card6Img</item>
+    </string-array>
+    <string-array name="card_layout">
+        <item>@+id/card0</item>
+        <item>@+id/card1</item>
+        <item>@+id/card2</item>
+        <item>@+id/card3</item>
+        <item>@+id/card4</item>
+        <item>@+id/card5</item>
+        <item>@+id/card6</item>
+    </string-array>
 </resources>
