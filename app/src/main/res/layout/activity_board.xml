@@ -456,21 +456,78 @@
         android:layout_height="fill_parent"
         android:id="@+id/TopNamePlates">
 
-        <ImageView
-            android:layout_width="110dp"
-            android:layout_height="45dp"
-            android:id="@+id/imageView3"
-            android:src="@drawable/playeronenameplate"
-            android:scaleType="fitXY" />
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_height="47dp"
+            android:layout_width="45dp"
+            android:id="@+id/player1NP"
+            android:layout_weight="7.93">
+            <FrameLayout
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"  >
 
-        <ImageView
-            android:layout_width="110dp"
-            android:layout_height="45dp"
-            android:id="@+id/imageView4"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1"
-            android:src="@drawable/playertwonameplate" />
+                <ImageView
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:scaleType="fitCenter"
+                    android:layout_weight="1"
+                    android:background = "@android:color/transparent"
+                    android:src="@drawable/playeronenameplate"
+                    android:id="@+id/nameplateImg"
+                    android:adjustViewBounds="true" >
+                </ImageView>
+                <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/nameplateScore"
+                    android:textStyle="bold"
+                    android:text="0"
+                    android:layout_marginTop= "16dp"
+                    android:layout_alignLeft="@+id/nameplateImg"
+                    android:layout_alignRight="@+id/nameplateImg"
+                    android:layout_alignTop="@+id/nameplateImg"
+                    android:layout_alignBottom="@+id/nameplateImg"
+                    android:layout_marginLeft="60dp"
+                    >
+                </TextView>
 
+            </FrameLayout>
+        </RelativeLayout>
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_height="47dp"
+            android:layout_width="45dp"
+            android:id="@+id/player2NP"
+            android:layout_weight="7.93">
+            <FrameLayout
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"  >
+
+                <ImageView
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:scaleType="fitCenter"
+                    android:layout_weight="1"
+                    android:background = "@android:color/transparent"
+                    android:src="@drawable/playertwonameplate"
+                    android:id="@+id/nameplate2Img"
+                    android:adjustViewBounds="true" >
+                </ImageView>
+                <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/nameplate2Score"
+                    android:textStyle="bold"
+                    android:text="0"
+                    android:layout_marginTop= "16dp"
+                    android:layout_alignLeft="@+id/nameplateImg"
+                    android:layout_alignRight="@+id/nameplateImg"
+                    android:layout_alignTop="@+id/nameplateImg"
+                    android:layout_alignBottom="@+id/nameplateImg"
+                    android:layout_marginLeft="60dp"
+                    >
+                </TextView>
+
+            </FrameLayout>
+        </RelativeLayout>
         <ImageView
             android:layout_width="110dp"
             android:layout_height="45dp"
@@ -478,7 +535,6 @@
             android:layout_gravity="top|right"
             android:layout_weight="1"
             android:src="@drawable/playerthreenameplate" />
-
     </LinearLayout>
 
     <LinearLayout

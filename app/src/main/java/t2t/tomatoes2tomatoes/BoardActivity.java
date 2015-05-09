@@ -103,8 +103,7 @@ public class BoardActivity extends Activity implements OnDragListener, OnLongCli
 
 
     public void StartFlip() {
-        //v.setEnabled(false);
-        //FOR TEXT FILLED CARDS THEY ARE RELATIVE LAYOUTS - so far only one is there.
+
         ((RelativeLayout)findViewById(R.id.card0)).clearAnimation();
         ((RelativeLayout)findViewById(R.id.card0)).setAnimation(animation1);
         ((RelativeLayout)findViewById(R.id.card0)).startAnimation(animation1);
@@ -429,10 +428,18 @@ public class BoardActivity extends Activity implements OnDragListener, OnLongCli
         TextView cardLabel = (TextView) findViewById(Labels.getResourceId(id, -1));
         TextView labelTextView = (TextView) findViewById(R.id.emptycardlabel);
         labelTextView.setText(cardLabel.getText().toString());
+        labelTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        labelTextView.setGravity(Gravity.LEFT);
+        labelTextView.setPadding(0,60,0,0);
+
 
         TextView cardDesc = (TextView) findViewById(Desc.getResourceId(id, -1));
         TextView descTextView = (TextView) findViewById(R.id.emptycarddesc);
         descTextView.setText(cardDesc.getText().toString());
+        descTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+        descTextView.setGravity(Gravity.RIGHT);
+        descTextView.setPadding(24,0,10,0);
+
 
         // Delete played card from deck
         RelativeLayout deleteCard = (RelativeLayout) findViewById(Layout.getResourceId(id, -1));
