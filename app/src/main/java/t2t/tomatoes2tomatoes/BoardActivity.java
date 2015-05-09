@@ -32,7 +32,7 @@ import android.view.MotionEvent;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import android.os.Handler;
-
+import java.util.Random;
 import android.view.View.OnTouchListener;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -65,57 +65,6 @@ public class BoardActivity extends Activity implements OnDragListener, OnLongCli
             cardToBeReplaced.setVisibility(View.INVISIBLE);
         }
 
-        /*// ADDED FROM TRYCARDS - ALEX
-         int numRedCards = 777;
-        int numGreenCards = 249;
-        int cardID = 10; // ID's start at 10 to avoid confusing with holder. Red cards have ID < 1000 Green cards have ID > 1000
-
-        ReadWithScanner redParse = new ReadWithScanner(this, R.raw.redapples,1,"","",0,false);
-        ReadWithScanner greenParse = new ReadWithScanner(this, R.raw.greenappples,1,"","",0,false);
-
-        CardClass redCards[] = new CardClass[numRedCards];
-        CardClass greenCards[] = new CardClass[numGreenCards];
-
-        String nameInfoR[][] = new String[numRedCards][2];
-        String nameInfoG[][] = new String[numGreenCards][2];
-
-
-        try {
-            nameInfoR = redParse.processLineByLine(nameInfoR);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        for(int i = 0; i< redCards.length; i++){
-            redCards[i] = new CardClass();
-            redCards[i].setID(cardID);
-            redCards[i].setName(nameInfoR[i][0]);
-            redCards[i].setInfo(nameInfoR[i][1]);
-            redCards[i].setHolder(0);
-            redCards[i].setFlip(false);
-            System.out.print("Red Card #" + Integer.toString(i+1) + ":    ID: " + redCards[i].cardID +  "\nNAME: " + redCards[i].cardName + "\nDESC: " + redCards[i].cardInfo +"\n");
-            cardID++;
-        }
-        try {
-            nameInfoG = greenParse.processLineByLine(nameInfoG);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        cardID = 1000; //green card ID start at 1000
-        for(int j =0; j<greenCards.length; j++){
-            greenCards[j] = new CardClass();
-            greenCards[j].setID(cardID);
-            greenCards[j].setName(nameInfoG[j][0]);
-            greenCards[j].setInfo(nameInfoG[j][1]);
-            greenCards[j].setHolder(0);
-            greenCards[j].setFlip(false);
-            System.out.print("Green Card # " + Integer.toString(j+1) +":    ID: " + greenCards[j].cardID + " \nNAME: " + greenCards[j].cardName + "\nDESC: " + greenCards[j].cardInfo +"\n");
-            cardID++;
-        }
-        System.out.print("Done.");
-        // end parsing*/
-
-        //parent
         LinearLayout parentLayout=(LinearLayout)findViewById(R.id.playerHand); //activity_main layout
 
 
@@ -131,6 +80,7 @@ public class BoardActivity extends Activity implements OnDragListener, OnLongCli
         findViewById(R.id.card4).setOnLongClickListener(this);
         findViewById(R.id.card5).setOnLongClickListener(this);
         findViewById(R.id.card6).setOnLongClickListener(this);
+
 
         // Register drag event listeners for target layout containers
         findViewById(R.id.playerHand).setOnDragListener(this);
@@ -149,8 +99,6 @@ public class BoardActivity extends Activity implements OnDragListener, OnLongCli
                 StartFlip();
             }
         }, 2000);
-
-
     }
 
 
@@ -184,6 +132,10 @@ public class BoardActivity extends Activity implements OnDragListener, OnLongCli
         ((RelativeLayout)findViewById(R.id.card6)).clearAnimation();
         ((RelativeLayout)findViewById(R.id.card6)).setAnimation(animation1);
         ((RelativeLayout)findViewById(R.id.card6)).startAnimation(animation1);
+
+        ((RelativeLayout)findViewById(R.id.greencard)).clearAnimation();
+        ((RelativeLayout)findViewById(R.id.greencard)).setAnimation(animation1);
+        ((RelativeLayout)findViewById(R.id.greencard)).startAnimation(animation1);
     }
 
     @Override
@@ -202,6 +154,7 @@ public class BoardActivity extends Activity implements OnDragListener, OnLongCli
                 ((ImageView)findViewById(R.id.card4Img)).setImageResource(R.drawable.redcard);
                 ((ImageView)findViewById(R.id.card5Img)).setImageResource(R.drawable.redcard);
                 ((ImageView)findViewById(R.id.card6Img)).setImageResource(R.drawable.redcard);
+                ((ImageView)findViewById(R.id.greencardImg)).setImageResource(R.drawable.greencard);
             } else {
                 ((ImageView)findViewById(R.id.card0Img)).setImageResource(R.drawable.cardback);
                 ((ImageView)findViewById(R.id.card1Img)).setImageResource(R.drawable.cardback);
@@ -210,6 +163,7 @@ public class BoardActivity extends Activity implements OnDragListener, OnLongCli
                 ((ImageView)findViewById(R.id.card4Img)).setImageResource(R.drawable.cardback);
                 ((ImageView)findViewById(R.id.card5Img)).setImageResource(R.drawable.cardback);
                 ((ImageView)findViewById(R.id.card6Img)).setImageResource(R.drawable.cardback);
+                ((ImageView)findViewById(R.id.greencardImg)).setImageResource(R.drawable.cardback);
 
             }
             ((ImageView)findViewById(R.id.card0Img)).clearAnimation();
@@ -240,6 +194,10 @@ public class BoardActivity extends Activity implements OnDragListener, OnLongCli
             ((ImageView)findViewById(R.id.card6Img)).setAnimation(animation2);
             ((ImageView)findViewById(R.id.card6Img)).startAnimation(animation2);
 
+            ((ImageView)findViewById(R.id.greencardImg)).clearAnimation();
+            ((ImageView)findViewById(R.id.greencardImg)).setAnimation(animation2);
+            ((ImageView)findViewById(R.id.greencardImg)).startAnimation(animation2);
+
         } else {
             isBackOfCardShowing=!isBackOfCardShowing;
             findViewById(R.id.card0).setEnabled(true);
@@ -249,6 +207,7 @@ public class BoardActivity extends Activity implements OnDragListener, OnLongCli
             findViewById(R.id.card4).setEnabled(true);
             findViewById(R.id.card5).setEnabled(true);
             findViewById(R.id.card6).setEnabled(true);
+            findViewById(R.id.greencard).setEnabled(true);
         }
 
         generateCards();
@@ -308,6 +267,21 @@ public class BoardActivity extends Activity implements OnDragListener, OnLongCli
 
         final TypedArray Labels = getResources().obtainTypedArray(R.array.card_label);
         final TypedArray Desc = getResources().obtainTypedArray(R.array.card_desc);
+
+        Random randomGen = new Random();
+        int randomIndex = randomGen.nextInt(greenCards.length);
+
+        TextView greenLabel = (TextView) findViewById(R.id.greencardlabel);
+        greenLabel.setText(greenCards[randomIndex].cardName);
+        greenLabel.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+        greenLabel.setGravity(Gravity.LEFT);
+        greenLabel.setPadding(0,60,0,0);
+
+        TextView greenDesc = (TextView) findViewById(R.id.greencarddesc);
+        greenDesc.setText(greenCards[randomIndex].cardInfo);
+        greenDesc.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+        greenDesc.setGravity(Gravity.RIGHT);
+        greenDesc.setPadding(24,0,10,0);
 
         for (int i = 0; i < Desc.length(); i++){
             // add text layout to parent

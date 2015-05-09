@@ -399,13 +399,54 @@
         android:paddingLeft="25dp"
         android:gravity="center_vertical">
 
-        <ImageView
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_height="@dimen/card_height"
             android:layout_width="@dimen/card_width"
-            android:layout_height="0dp"
-            android:id="@+id/GreenCard"
-            android:layout_gravity="left|center_vertical"
-            android:src="@drawable/blankgreen"
-            android:layout_weight="1" />
+            android:id="@+id/greencard"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp">
+            <FrameLayout
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"  >
+
+                <ImageView
+                    android:layout_height="@dimen/card_height"
+                    android:layout_width="@dimen/card_width"
+                    android:scaleType="fitCenter"
+                    android:layout_weight="1"
+                    android:background = "@android:color/transparent"
+                    android:src="@drawable/cardback"
+                    android:id="@+id/greencardImg"
+                    android:adjustViewBounds="true" >
+                </ImageView>
+                <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/greencarddesc"
+                    android:textStyle="bold"
+                    android:text=""
+                    android:layout_marginTop= "10dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    >
+                </TextView>
+                <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/greencardlabel"
+
+                    android:layout_alignParentRight="true"
+                    android:textStyle="bold"
+                    android:textSize="12pt"
+                    android:layout_alignTop="@+id/redcard"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="20dp"
+                    android:rotation="270"
+                    >
+                </TextView>
+            </FrameLayout>
+        </RelativeLayout>
 
     </LinearLayout>
 
