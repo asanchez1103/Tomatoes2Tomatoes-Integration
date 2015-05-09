@@ -1,0 +1,567 @@
+<RelativeLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:layout_width="fill_parent"
+        android:orientation="vertical"
+        android:background="@drawable/appbackground"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/judgeView"
+        android:weightSum="1">
+
+
+    </LinearLayout>
+
+    <HorizontalScrollView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:fillViewport="false"
+        android:id="@+id/JudgeScroll"
+        android:focusable="false"
+        android:paddingTop="0dp"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentEnd="false"
+        android:layout_alignBottom="@+id/MiddleLeft">
+
+
+        <LinearLayout
+            android:layout_height="@dimen/card_height"
+            android:layout_width="800dp"
+            android:id="@+id/playerHand"
+            android:baselineAligned="false"
+            android:measureWithLargestChild="false"
+            android:longClickable="false"
+            android:focusable="false"
+            android:gravity="bottom"
+            android:weightSum="6"
+            android:layout_weight="1">
+
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_height="@dimen/card_height"
+                android:layout_width="@dimen/card_width"
+                android:id="@+id/card0"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp">
+                <FrameLayout
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"  >
+
+                    <ImageView
+                        android:layout_height="@dimen/card_height"
+                        android:layout_width="@dimen/card_width"
+                        android:scaleType="fitCenter"
+                        android:layout_weight="1"
+                        android:background = "@android:color/transparent"
+                        android:src="@drawable/cardback"
+                        android:id="@+id/card0Img"
+                        android:adjustViewBounds="true" >
+                    </ImageView>
+                    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/card0desc"
+                        android:textStyle="bold"
+                        android:text=""
+                        android:layout_marginTop= "10dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        >
+                    </TextView>
+                    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/card0label"
+
+                        android:layout_alignParentRight="true"
+                        android:textStyle="bold"
+                        android:textSize="12pt"
+                        android:layout_alignTop="@+id/redcard"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="20dp"
+                        android:rotation="270"
+                        >
+                    </TextView>
+                </FrameLayout>
+            </RelativeLayout>
+
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_height="@dimen/card_height"
+                android:layout_width="@dimen/card_width"
+                android:id="@+id/card1"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp">
+                <FrameLayout
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"  >
+
+                    <ImageView
+                        android:layout_height="@dimen/card_height"
+                        android:layout_width="@dimen/card_width"
+                        android:scaleType="fitCenter"
+                        android:layout_weight="1"
+                        android:background = "@android:color/transparent"
+                        android:src="@drawable/cardback"
+                        android:id="@+id/card1Img"
+                        android:adjustViewBounds="true" >
+                    </ImageView>
+                    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/card1desc"
+                        android:textStyle="bold"
+                        android:text=""
+                        android:layout_marginTop= "10dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        >
+                    </TextView>
+                    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/card1label"
+
+                        android:layout_alignParentRight="true"
+                        android:textStyle="bold"
+                        android:textSize="12pt"
+                        android:layout_alignTop="@+id/redcard"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="20dp"
+                        android:rotation="270"
+                        >
+                    </TextView>
+                </FrameLayout>
+            </RelativeLayout>
+
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_height="@dimen/card_height"
+                android:layout_width="@dimen/card_width"
+                android:id="@+id/card2"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp">
+                <FrameLayout
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"  >
+
+                    <ImageView
+                        android:layout_height="@dimen/card_height"
+                        android:layout_width="@dimen/card_width"
+                        android:scaleType="fitCenter"
+                        android:layout_weight="1"
+                        android:background = "@android:color/transparent"
+                        android:src="@drawable/cardback"
+                        android:id="@+id/card2Img"
+                        android:adjustViewBounds="true" >
+                    </ImageView>
+                    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/card2desc"
+                        android:textStyle="bold"
+                        android:text=""
+                        android:layout_marginTop= "10dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        >
+                    </TextView>
+                    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/card2label"
+
+                        android:layout_alignParentRight="true"
+                        android:textStyle="bold"
+                        android:textSize="12pt"
+                        android:layout_alignTop="@+id/redcard"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="20dp"
+                        android:rotation="270"
+                        >
+                    </TextView>
+                </FrameLayout>
+            </RelativeLayout>
+
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_height="@dimen/card_height"
+                android:layout_width="@dimen/card_width"
+                android:id="@+id/card3"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp">
+                <FrameLayout
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"  >
+
+                    <ImageView
+                        android:layout_height="@dimen/card_height"
+                        android:layout_width="@dimen/card_width"
+                        android:scaleType="fitCenter"
+                        android:layout_weight="1"
+                        android:background = "@android:color/transparent"
+                        android:src="@drawable/cardback"
+                        android:id="@+id/card3Img"
+                        android:adjustViewBounds="true" >
+                    </ImageView>
+                    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/card3desc"
+                        android:textStyle="bold"
+                        android:text=""
+                        android:layout_marginTop= "10dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        >
+                    </TextView>
+                    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/card3label"
+
+                        android:layout_alignParentRight="true"
+                        android:textStyle="bold"
+                        android:textSize="12pt"
+                        android:layout_alignTop="@+id/redcard"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="20dp"
+                        android:rotation="270"
+                        >
+                    </TextView>
+                </FrameLayout>
+            </RelativeLayout>
+
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_height="@dimen/card_height"
+                android:layout_width="@dimen/card_width"
+                android:id="@+id/card4"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp">
+                <FrameLayout
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"  >
+
+                    <ImageView
+                        android:layout_height="@dimen/card_height"
+                        android:layout_width="@dimen/card_width"
+                        android:scaleType="fitCenter"
+                        android:layout_weight="1"
+                        android:background = "@android:color/transparent"
+                        android:src="@drawable/cardback"
+                        android:id="@+id/card4Img"
+                        android:adjustViewBounds="true" >
+                    </ImageView>
+                    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/card4desc"
+                        android:textStyle="bold"
+                        android:text=""
+                        android:layout_marginTop= "10dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        >
+                    </TextView>
+                    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/card4label"
+
+                        android:layout_alignParentRight="true"
+                        android:textStyle="bold"
+                        android:textSize="12pt"
+                        android:layout_alignTop="@+id/redcard"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="20dp"
+                        android:rotation="270"
+                        >
+                    </TextView>
+                </FrameLayout>
+            </RelativeLayout>
+
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_height="@dimen/card_height"
+                android:layout_width="@dimen/card_width"
+                android:id="@+id/card5"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp">
+                <FrameLayout
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"  >
+
+                    <ImageView
+                        android:layout_height="@dimen/card_height"
+                        android:layout_width="@dimen/card_width"
+                        android:scaleType="fitCenter"
+                        android:layout_weight="1"
+                        android:background = "@android:color/transparent"
+                        android:src="@drawable/cardback"
+                        android:id="@+id/card5Img"
+                        android:adjustViewBounds="true" >
+                    </ImageView>
+                    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/card5desc"
+                        android:textStyle="bold"
+                        android:text=""
+                        android:layout_marginTop= "10dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        >
+                    </TextView>
+                    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/card5label"
+
+                        android:layout_alignParentRight="true"
+                        android:textStyle="bold"
+                        android:textSize="12pt"
+                        android:layout_alignTop="@+id/redcard"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="20dp"
+                        android:rotation="270"
+                        >
+                    </TextView>
+                </FrameLayout>
+            </RelativeLayout>
+
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_height="@dimen/card_height"
+                android:layout_width="@dimen/card_width"
+                android:id="@+id/card6"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp">
+                <FrameLayout
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"  >
+
+                    <ImageView
+                        android:layout_height="@dimen/card_height"
+                        android:layout_width="@dimen/card_width"
+                        android:scaleType="fitCenter"
+                        android:layout_weight="1"
+                        android:background = "@android:color/transparent"
+                        android:src="@drawable/cardback"
+                        android:id="@+id/card6Img"
+                        android:adjustViewBounds="true" >
+                    </ImageView>
+                    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/card6desc"
+                        android:textStyle="bold"
+                        android:text=""
+                        android:layout_marginTop= "10dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        >
+                    </TextView>
+                    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/card6label"
+
+                        android:layout_alignParentRight="true"
+                        android:textStyle="bold"
+                        android:textSize="12pt"
+                        android:layout_alignTop="@+id/redcard"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="20dp"
+                        android:rotation="270"
+                        >
+                    </TextView>
+                </FrameLayout>
+            </RelativeLayout>
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="false"
+        android:paddingEnd="0dp"
+        android:paddingStart="0dp"
+        android:paddingBottom="160dp"
+        android:weightSum="1"
+        android:id="@+id/MiddleLeft"
+        android:layout_alignParentStart="true"
+        android:paddingLeft="25dp"
+        android:gravity="center_vertical">
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_height="@dimen/card_height"
+            android:layout_width="@dimen/card_width"
+            android:id="@+id/greencard"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp">
+            <FrameLayout
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"  >
+
+                <ImageView
+                    android:layout_height="@dimen/card_height"
+                    android:layout_width="@dimen/card_width"
+                    android:scaleType="fitCenter"
+                    android:layout_weight="1"
+                    android:background = "@android:color/transparent"
+                    android:src="@drawable/cardback"
+                    android:id="@+id/greencardImg"
+                    android:adjustViewBounds="true" >
+                </ImageView>
+                <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/greencarddesc"
+                    android:textStyle="bold"
+                    android:text=""
+                    android:layout_marginTop= "10dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    >
+                </TextView>
+                <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/greencardlabel"
+
+                    android:layout_alignParentRight="true"
+                    android:textStyle="bold"
+                    android:textSize="12pt"
+                    android:layout_alignTop="@+id/redcard"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="20dp"
+                    android:rotation="270"
+                    >
+                </TextView>
+            </FrameLayout>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/TopNamePlates">
+
+        <ImageView
+            android:layout_width="110dp"
+            android:layout_height="45dp"
+            android:id="@+id/imageView3"
+            android:src="@drawable/playeronenameplate"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:layout_width="110dp"
+            android:layout_height="45dp"
+            android:id="@+id/imageView4"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:src="@drawable/playertwonameplate" />
+
+        <ImageView
+            android:layout_width="110dp"
+            android:layout_height="45dp"
+            android:id="@+id/player3"
+            android:layout_gravity="top|right"
+            android:layout_weight="1"
+            android:src="@drawable/playerthreenameplate" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:paddingEnd="0dp"
+        android:paddingStart="0dp"
+        android:paddingBottom="160dp"
+        android:weightSum="1"
+        android:id="@+id/MiddleRight"
+        android:layout_alignParentStart="false"
+        android:paddingLeft="0dp"
+        android:gravity="center_vertical"
+        android:paddingRight="25dp">
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_height="@dimen/card_height"
+            android:layout_width="@dimen/card_width"
+            android:id="@+id/emptycard"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_gravity="right">
+
+            <FrameLayout
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"  >
+
+                <ImageView
+                    android:layout_height="@dimen/card_height"
+                    android:layout_width="@dimen/card_width"
+                    android:scaleType="fitCenter"
+                    android:layout_weight="1"
+                    android:background = "@android:color/transparent"
+                    android:src="@drawable/placeholder"
+                    android:id="@+id/emptycardImg"
+                    android:adjustViewBounds="true" >
+                </ImageView>
+                <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/emptycarddesc"
+                    android:textStyle="bold"
+                    android:text=""
+                    android:layout_marginTop= "10dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    >
+                </TextView>
+                <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/emptycardlabel"
+
+                    android:layout_alignParentRight="true"
+                    android:textStyle="bold"
+                    android:textSize="12pt"
+                    android:layout_alignTop="@+id/redcard"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="20dp"
+                    android:rotation="270"
+                    >
+                </TextView>
+            </FrameLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentEnd="false"
+        android:gravity="center_horizontal">
+
+    </LinearLayout>
+
+
+</RelativeLayout>
+
+
+
+

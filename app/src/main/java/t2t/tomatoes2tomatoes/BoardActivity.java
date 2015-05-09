@@ -1,6 +1,7 @@
 package t2t.tomatoes2tomatoes;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.ClipDescription;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -48,6 +49,8 @@ public class BoardActivity extends Activity implements OnDragListener, OnLongCli
     private Animation animation1;
     private Animation animation2;
     private boolean isBackOfCardShowing = true;
+    private int randomIndex;
+     private   Random randomGen = new Random();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -267,8 +270,8 @@ public class BoardActivity extends Activity implements OnDragListener, OnLongCli
         final TypedArray Labels = getResources().obtainTypedArray(R.array.card_label);
         final TypedArray Desc = getResources().obtainTypedArray(R.array.card_desc);
 
-        Random randomGen = new Random();
-        int randomIndex = randomGen.nextInt(greenCards.length);
+
+        randomIndex = randomGen.nextInt(greenCards.length);
 
         TextView greenLabel = (TextView) findViewById(R.id.greencardlabel);
         greenLabel.setText(greenCards[randomIndex].cardName);
@@ -284,12 +287,12 @@ public class BoardActivity extends Activity implements OnDragListener, OnLongCli
 
         for (int i = 0; i < Desc.length(); i++){
             // add text layout to parent
-
+            randomIndex = randomGen.nextInt(redCards.length);
             //view = layoutInflater.inflate(R.layout.single_card_layout, parentLayout, false);
             // RelativeLayout relativeLayout = (RelativeLayout)view.findViewById((R.id.cardtemplate));
 
             TextView labelTextView = (TextView) findViewById(Labels.getResourceId(i, -1));
-            labelTextView.setText(redCards[i].cardName);
+            labelTextView.setText(redCards[randomIndex].cardName);
             labelTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             labelTextView.setGravity(Gravity.LEFT);
             labelTextView.setPadding(0,60,0,0);
@@ -300,7 +303,7 @@ public class BoardActivity extends Activity implements OnDragListener, OnLongCli
 
             //view = layoutInflater.inflate(R.layout.card_desc, parentLayout, false);
             TextView descTextView = (TextView) findViewById(Desc.getResourceId(i, -1));
-            descTextView.setText(redCards[i].cardInfo);
+            descTextView.setText(redCards[randomIndex].cardInfo);
             descTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
             descTextView.setGravity(Gravity.RIGHT);
             descTextView.setPadding(24,0,10,0);
@@ -377,6 +380,7 @@ public class BoardActivity extends Activity implements OnDragListener, OnLongCli
                 bottomLinearLayout.addView(draggedImageView);
                 draggedImageView.setVisibility(View.VISIBLE);
 
+
                 switch (draggedImageView.getId()) {
                     case R.id.card0:
                         CardEvent(0);
@@ -444,5 +448,13 @@ public class BoardActivity extends Activity implements OnDragListener, OnLongCli
         // Delete played card from deck
         RelativeLayout deleteCard = (RelativeLayout) findViewById(Layout.getResourceId(id, -1));
         deleteCard.setVisibility(View.GONE);
+        //Go to Confirmation popup
+        showConfirmSelect();
     }
+    // This is needed to show player confirm play pop-up
+    public void showConfirmSelect() {
+        DialogFragment confirmCard = new confirmPlay();
+        confirmCard.show(getFragmentManager(), "PlayerConfirmFrag");
+    }
+
 }
